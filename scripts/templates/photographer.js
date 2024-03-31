@@ -1,20 +1,3 @@
-export function creatPhotographerTemplate(data) {
-  const { name, id, city, country, tagline, price, portrait, altname } = data;
-  const picture = `assets/photographers/${portrait}`;
-
-  const image = creatImage(picture, altname);
-  const h2 = creatHeading("h2", name);
-  const h3 = creatHeading("h3", `${city}, ${country}`);
-  const tag = creatParagraph(tagline);
-  const rate = creatParagraph(`${price}€/jour`);
-  const imageContainer = creatPhotographeContainer([image]);
-
-  const content = [imageContainer, h2, h3, tag, rate];
-  const article = creatLinkForPhotographe(id, content, name);
-
-  return article;
-}
-
 export function creatImage(src, alt) {
   const image = document.createElement("img");
   image.setAttribute("src", src);
@@ -60,4 +43,21 @@ function creatLink(href) {
   const link = document.createElement("a");
   link.setAttribute("href", href);
   return link;
+}
+
+export function creatPhotographerTemplate(data) {
+  const { name, id, city, country, tagline, price, portrait, altname } = data;
+  const picture = `assets/photographers/${portrait}`;
+
+  const image = creatImage(picture, altname);
+  const h2 = creatHeading("h2", name);
+  const h3 = creatHeading("h3", `${city}, ${country}`);
+  const tag = creatParagraph(tagline);
+  const rate = creatParagraph(`${price}€/jour`);
+  const imageContainer = creatPhotographeContainer([image]);
+
+  const content = [imageContainer, h2, h3, tag, rate];
+  const article = creatLinkForPhotographe(id, content, name);
+
+  return article;
 }
