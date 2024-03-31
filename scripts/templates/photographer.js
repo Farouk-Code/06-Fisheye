@@ -27,6 +27,12 @@ export function creatPhotographeContainer(children) {
   return imageContainer;
 }
 
+function creatLink(href) {
+  const link = document.createElement("a");
+  link.setAttribute("href", href);
+  return link;
+}
+
 function creatLinkForPhotographe(id, content, name) {
   const article = document.createElement("article");
   const link = creatLink(`photographer.html?id=${id}`);
@@ -37,12 +43,6 @@ function creatLinkForPhotographe(id, content, name) {
   }
   article.appendChild(link);
   return article;
-}
-
-function creatLink(href) {
-  const link = document.createElement("a");
-  link.setAttribute("href", href);
-  return link;
 }
 
 export function creatPhotographerTemplate(data) {
