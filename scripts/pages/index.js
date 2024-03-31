@@ -20,12 +20,26 @@ async function displayData(photographers, photographersSection) {
   }
 }
 
+function keyboardNavigation(photographersSection) {
+  photographersSection.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      const image = event.target.querySelector("img");
+      if (image) {
+        const link = image.closest("a");
+        if (link) {
+          link.click();
+        }
+      }
+    }
+  });
+}
+
 async function init() {
-  // Récupère les datas des photographes
   const { photographers } = await getPhotographers();
   console.log(photographers);
   const photographersSection = document.querySelector(".photographer_section");
   displayData(photographers, photographersSection);
+  keyboardNavigation(photographersSection);
 }
 
 init();
