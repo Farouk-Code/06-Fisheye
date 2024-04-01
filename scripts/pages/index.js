@@ -1,4 +1,4 @@
-import { creatPhotographerTemplate } from "../templates/photographer.js";
+import { createPhotographerProfileTemplate } from "../templates/photographer.js";
 
 async function getPhotographers() {
   try {
@@ -13,9 +13,15 @@ async function getPhotographers() {
   }
 }
 
+/**
+ * Affiche les profils des photographes dans la section spécifiée.
+ * @param {Object[]} photographers
+ * @param {HTMLElement} photographersSection
+ */
 async function displayData(photographers, photographersSection) {
   for (let photographer of photographers) {
-    const photographerTemplate = creatPhotographerTemplate(photographer);
+    const photographerTemplate =
+      createPhotographerProfileTemplate(photographer);
     photographersSection.appendChild(photographerTemplate);
   }
 }
@@ -38,6 +44,7 @@ async function init() {
   const { photographers } = await getPhotographers();
   console.log(photographers);
   const photographersSection = document.querySelector(".photographer_section");
+  // @ts-ignore
   displayData(photographers, photographersSection);
   keyboardNavigation(photographersSection);
 }

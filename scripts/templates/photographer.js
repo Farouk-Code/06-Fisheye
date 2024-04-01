@@ -1,23 +1,45 @@
-export function creatImage(src, alt) {
+/**
+ * Créer une image avec sa source et sa description alternative spécifiés.
+ * @param {String} src
+ * @param {String} alt
+ * @returns {HTMLImageElement}
+ */
+export function createImage(src, alt) {
   const image = document.createElement("img");
   image.setAttribute("src", src);
   image.setAttribute("alt", alt);
   return image;
 }
 
-export function creatHeading(type, text) {
+/**
+ * Crée un titre avec le type et le contenue spécifiés.
+ * @param {String} type
+ * @param {String} text
+ * @returns {HTMLElement}
+ */
+export function createHeading(type, text) {
   const heading = document.createElement(type);
   heading.textContent = text;
   return heading;
 }
 
-export function creatParagraph(text) {
+/**
+ * Crée un paragraphe avec son contenue.
+ * @param {String} text
+ * @returns {HTMLDivElement}
+ */
+export function createParagraph(text) {
   const paragpraph = document.createElement("p");
   paragpraph.textContent = text;
   return paragpraph;
 }
 
-export function creatPhotographeContainer(children) {
+/**
+ * Crée un conteneur pour un photographe avec les éléments enfants spécifiés.
+ * @param {HTMLElement[]} children
+ * @returns {HTMLDivElement}
+ */
+export function createPhotographeContainer(children) {
   const imageContainer = document.createElement("div");
   imageContainer.classList.add("photographer_card");
   imageContainer.setAttribute("tabindex", "0");
@@ -27,16 +49,32 @@ export function creatPhotographeContainer(children) {
   return imageContainer;
 }
 
-function creatLink(href) {
+/**
+ * Crée un élément de lien avec l'URL spécifiée.
+ * @param {String} href
+ * @returns {HTMLAnchorElement}
+ */
+function createLink(href) {
   const link = document.createElement("a");
   link.setAttribute("href", href);
   return link;
 }
 
-function creatLinkForPhotographe(id, content, name) {
+/**
+ * Crée un élément d'article contenant un lien vers le profil du photographe, avec un contenu spécifié.
+ * @param {string} photographerId
+ * @param {HTMLElement[]} content
+ * @param {string} photographerName
+ * @returns {HTMLElement}
+ */
+function createPhotographerProfileArticle(
+  photographerId,
+  content,
+  photographerName
+) {
   const article = document.createElement("article");
-  const link = creatLink(`photographer.html?id=${id}`);
-  const ariaLabel = `Profil du photographe : ${name}`;
+  const link = createLink(`photographer.html?id=${photographerId}`);
+  const ariaLabel = `Profil du photographe : ${photographerName}`;
   link.setAttribute("aria-label", ariaLabel);
   for (let element of content) {
     link.appendChild(element);
@@ -45,19 +83,37 @@ function creatLinkForPhotographe(id, content, name) {
   return article;
 }
 
-export function creatPhotographerTemplate(data) {
-  const { name, id, city, country, tagline, price, portrait, altname } = data;
+/**
+ * Crée un profil pour un photographe
+ * @param {Object} data
+ * @returns {HTMLElement}
+ */
+export function createPhotographerProfileTemplate(data) {
+  const {
+    photographerName,
+    photographerId,
+    city,
+    country,
+    tagline,
+    price,
+    portrait,
+    altname,
+  } = data;
   const picture = `assets/photographers/${portrait}`;
 
-  const image = creatImage(picture, altname);
-  const h2 = creatHeading("h2", name);
-  const h3 = creatHeading("h3", `${city}, ${country}`);
-  const tag = creatParagraph(tagline);
-  const rate = creatParagraph(`${price}€/jour`);
-  const imageContainer = creatPhotographeContainer([image]);
+  const image = createImage(picture, altname);
+  const h2 = createHeading("h2", photographerName);
+  const h3 = createHeading("h3", `${city}, ${country}`);
+  const tag = createParagraph(tagline);
+  const rate = createParagraph(`${price}€/jour`);
+  const imageContainer = createPhotographeContainer([image]);
 
   const content = [imageContainer, h2, h3, tag, rate];
-  const article = creatLinkForPhotographe(id, content, name);
+  const article = createPhotographerProfileArticle(
+    photographerId,
+    content,
+    photographerName
+  );
 
   return article;
 }
