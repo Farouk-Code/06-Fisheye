@@ -26,9 +26,14 @@ async function displayData(photographers, photographersSection) {
   }
 }
 
+/**
+ * Gère la navigation au clavier dans la section des profils des photographes.
+ * @param {HTMLElement} photographersSection
+ */
 function keyboardNavigation(photographersSection) {
   photographersSection.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
+      // @ts-ignore
       const image = event.target.querySelector("img");
       if (image) {
         const link = image.closest("a");
@@ -46,6 +51,7 @@ async function init() {
   const photographersSection = document.querySelector(".photographer_section");
   // @ts-ignore
   displayData(photographers, photographersSection);
+  // @ts-ignore
   keyboardNavigation(photographersSection);
 }
 
