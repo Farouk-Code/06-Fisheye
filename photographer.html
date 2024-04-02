@@ -2,10 +2,13 @@
 <html>
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <title>Fisheye - photographe</title>
   </head>
   <body>
     <header>
@@ -13,24 +16,67 @@
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()">
+          Contactez-moi
+        </button>
+      </div>
+      <div class="photograph-content">
+        <label for="dropdawn">Trier par</label>
+        <select name="dropdawn" id="dropdawn">
+          <option value="popularite">Popularité</option>
+          <option value="date">Date</option>
+          <option value="titre">Titre</option>
+        </select>
+      </div>
+      <div class="photo-grid" id="photo-grid" role="group">
+        <!-- Les photos sont ajoutées ici de manière dynamique -->
       </div>
     </main>
     <div id="contact_modal">
-			<div class="modal">
-				<header>
+      <div class="modal">
+        <header>
           <h2>Contactez-moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
+        <form id="contact-form">
+          <div>
+            <label for="first-name">Prénom</label>
+            <input id="first-name" type="text" />
+          </div>
+          <div>
+            <label for="last-name">Nom</label>
+            <input id="last-name" type="text" />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="text" />
+          </div>
+          <div class="message-container">
+            <label for="message">Email</label>
+            <textarea id="message"></textarea>
+          </div>
           <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
+        </form>
+      </div>
+    </div>
+    <div
+      class="image-carousel"
+      id="image-carousel"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="carousel-prev" aria-label="Previous Image" tabindex="0"></div>
+      <div class="carousel-next" aria-label="Next Image" tabindex="0"></div>
+      <div class="carousel-content">
+        <!-- Les images seront ajoutées ici -->
+      </div>
+      <div
+        class="carousel-close"
+        aria-label="Close Carousel"
+        tabindex="0"
+      ></div>
+    </div>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
