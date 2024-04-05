@@ -89,31 +89,18 @@ function createPhotographerProfileArticle(
  * @returns {HTMLElement}
  */
 export function createPhotographerProfileTemplate(data) {
-  const {
-    photographerName,
-    photographerId,
-    city,
-    country,
-    tagline,
-    price,
-    portrait,
-    altname,
-  } = data;
+  const { name, id, city, country, tagline, price, portrait } = data;
   const picture = `assets/photographers/${portrait}`;
 
-  const image = createImage(picture, altname);
-  const h2 = createHeading("h2", photographerName);
+  const image = createImage(picture, portrait);
+  const h2 = createHeading("h2", name);
   const h3 = createHeading("h3", `${city}, ${country}`);
   const tag = createParagraph(tagline);
   const rate = createParagraph(`${price}€/jour`);
   const imageContainer = createPhotographeContainer([image]);
 
   const content = [imageContainer, h2, h3, tag, rate];
-  const article = createPhotographerProfileArticle(
-    photographerId,
-    content,
-    photographerName
-  );
+  const article = createPhotographerProfileArticle(id, content, name);
 
   return article;
 }

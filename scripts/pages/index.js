@@ -47,7 +47,6 @@ function keyboardNavigation(photographersSection) {
 
 async function init() {
   const { photographers } = await getPhotographers();
-  console.log(photographers);
   const photographersSection = document.querySelector(".photographer_section");
   // @ts-ignore
   displayData(photographers, photographersSection);
