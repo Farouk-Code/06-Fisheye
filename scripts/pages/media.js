@@ -16,7 +16,7 @@ class MediaImage extends Media {
     this.url = `assets/images/${data.photographerId}/${data.image}`;
   }
 
-  createImageMedia() {
+  createMediaElement() {
     const mediaImage = document.createElement("img");
     mediaImage.setAttribute("src", this.url);
     mediaImage.setAttribute("alt", this.title);
@@ -31,7 +31,7 @@ class MediaVideo extends Media {
     this.url = `assets/images/${data.photographerId}/${data.video}`;
   }
 
-  createVideoMedia() {
+  createMediaElement() {
     const mediaVideo = document.createElement("video");
     mediaVideo.setAttribute("controls", "");
     const sourceVideo = document.createElement("source");
