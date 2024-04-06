@@ -7,10 +7,13 @@ const options = dropdown.querySelector(".dropdown-menu");
 const dropdownIcon = dropdown.querySelector(".dropdown-icon");
 const sortOptions = Array.from(options.querySelectorAll(".dropdown-option"));
 
-// Initialize the selected option as "Popularité"
+// Option de base : "Popularité"
 let selectedOption = "filter-popularite";
 
-// Function to toggle the dropdown
+/**
+ * Bascule l'affichage d'un élément de menu déroulant entre visible et caché.
+ * Met également à jour les attributs aria-expanded et l'icône du menu déroulant en conséquence.
+ */
 function toggleDropdown() {
   if (options.style.display === "block") {
     options.style.display = "none";
@@ -25,28 +28,31 @@ function toggleDropdown() {
     options.style.display === "block" ? "rotate(90deg)" : "rotate(0)";
 }
 
-// Function to handle selecting an option
+/**
+ * Sélectionne une option dans un menu déroulant en déplaçant l'option sélectionnée vers la partie supérieure de la liste.
+ * Réorganise également les autres options pour refléter la nouvelle sélection.
+ * @param {string} optionId - L'identifiant de l'option à sélectionner.
+ */
 function selectOption(optionId) {
-  // Get the previously selected option
   const previousOptionId = selectedOption;
-  // Remove the previously selected option from the selected div
   if (previousOptionId !== optionId) {
     const previousOptionElement = document.getElementById(previousOptionId);
     selected.removeChild(previousOptionElement);
 
-    // Reorder the items to reflect the new selection
     options.appendChild(previousOptionElement);
-    sortOptions
-      .filter((option) => option.id !== previousOptionId)
-      .sort(
-        (a, b) => a.getAttribute("data-order") - b.getAttribute("data-order")
-      )
-      .forEach((option, index) => {
-        option.style.order = index + 1;
-      });
+    const filteredOptions = sortOptions.filter(
+      (option) => option.id !== previousOptionId
+    );
+    const sortedOptions = filteredOptions.sort(
+      (a, b) => a.getAttribute("data-order") - b.getAttribute("data-order")
+    );
+    for (let index = 0; index < sortedOptions.length; index++) {
+      const option = sortedOptions[index];
+      option.style.order = index + 1;
+    }
   }
 
-  // Set the new selected option
+  // Définir la nouvelle option sélectionnée
   selectedOption = optionId;
   const selectedOptionElement = document.getElementById(optionId);
   selected.appendChild(selectedOptionElement);
@@ -60,7 +66,7 @@ function selectOption(optionId) {
   sortPhotos(optionId);
 }
 
-// Add click event listeners to open/close the dropdown
+// Ajouter des event listener de clic pour ouvrir/fermer la liste déroulante.
 selected.addEventListener("click", () => toggleDropdown());
 selected.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
@@ -68,7 +74,7 @@ selected.addEventListener("keydown", (e) => {
   }
 });
 
-sortOptions.forEach((option) => {
+for (const option of sortOptions) {
   option.addEventListener("click", (e) => {
     selectOption(e.target.id);
   });
@@ -78,7 +84,7 @@ sortOptions.forEach((option) => {
       selectOption(e.target.id);
     }
   });
-});
+}
 
-// Set the initial selected option
+// Définir l'option initiale sélectionnée
 selectOption(selectedOption);
