@@ -21,6 +21,10 @@ if (photographerId) {
   console.error("ID invalide");
 }
 
+/**
+ * Initialise le profil du photographe avec les données récupérées.
+ * @param {String} id L'identifiant du photographe récupéré depuis l'url.
+ */
 async function initPhotographerProfile(id) {
   try {
     const data = await fetchPhotographerData(id);
@@ -30,6 +34,10 @@ async function initPhotographerProfile(id) {
   }
 }
 
+/**
+ * Crée le profil du photographe en utilisant les données fournies.
+ * @param {Object} data
+ */
 function createPhotographerProfile(data) {
   const { name, city, country, tagline, price, portrait, altname } = data;
   const picture = `assets/photographers/${portrait}`;
@@ -60,6 +68,12 @@ function createPhotographerProfile(data) {
   parentContainer.appendChild(heart);
 }
 
+/**
+ * Crée un élément vidéo avec les attributs spécifiés.
+ * @param {string} src - Le chemin vers la source de la vidéo.
+ * @param {string} alt - Le texte alternatif pour la vidéo.
+ * @returns {HTMLVideoElement} L'élément vidéo créé.
+ */
 function createVideoElement(src, alt) {
   const video = document.createElement("video");
   video.src = src;
@@ -69,6 +83,10 @@ function createVideoElement(src, alt) {
   return video;
 }
 
+/**
+ * Crée et rend les médias (photos ou vidéos) dans la grille spécifiée.
+ * @param {Object[]} photos - Le tableau contenant les données des médias à créer et afficher.
+ */
 export function createAndRenderMedia(photos) {
   if (!photos) {
     console.error("No media for this photographe");
@@ -118,15 +136,19 @@ export function createAndRenderMedia(photos) {
     likesContainer.appendChild(heart);
 
     // Event listener for clicking the heart icon
-    heart.addEventListener("click", () =>
-      likeMedia(media.id, mediaCard, likes, heart)
-    );
+    heart.addEventListener("click", () => likeMedia(media.id, likes, heart));
     // Render the media card
     photoGrid.appendChild(mediaCard);
   }
 }
 
-function likeMedia(mediaId, mediaCard, likesElement, heart) {
+/**
+ * Gère l'action de "liker" un média.
+ * @param {Number} mediaId
+ * @param {HTMLElement} likesElement
+ * @param {HTMLElement} heart
+ */
+function likeMedia(mediaId, likesElement, heart) {
   if (!likedMedia.has(mediaId)) {
     // Element pas encore aimé
     const media = photographerPhotos.find((media) => media.id === mediaId);
@@ -140,6 +162,10 @@ function likeMedia(mediaId, mediaCard, likesElement, heart) {
   }
 }
 
+/**
+ * Crée une icône de cœur SVG.
+ * @returns {SVGElement} L'élément SVG représentant l'icône de cœur.
+ */
 function createHeartIcon() {
   const heart = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   heart.setAttribute("width", "21");
@@ -160,18 +186,40 @@ function createHeartIcon() {
   return heart;
 }
 
+/**
+ * Trie les photos par popularité (nombre de likes décroissant).
+ * @param {Object[]} photos - Le tableau contenant les données des photos à trier.
+ * @param {number} photos[].likes - Le nombre de likes de la photo.
+ * @returns {Object[]} Le tableau des photos triées par popularité.
+ */
 function sortByPopularity(photos) {
   return photos.sort((a, b) => b.likes - a.likes);
 }
 
+/**
+ * Trie les photos par date (du plus ancien au plus récent).
+ * @param {Object[]} photos - Le tableau contenant les données des photos à trier.
+ * @param {string} photos[].date - La date de la photo au format string.
+ * @returns {Object[]} Le tableau des photos triées par date.
+ */
 function sortByDate(photos) {
   return photos.sort((a, b) => new Date(a.date) - new Date(b.date));
 }
 
+/**
+ * Trie les photos par titre (par ordre alphabétique).
+ * @param {Object[]} photos - Le tableau contenant les données des photos à trier.
+ * @param {string} photos[].title - Le titre de la photo.
+ * @returns {Object[]} Le tableau des photos triées par titre.
+ */
 function sortByTitle(photos) {
   return photos.sort((a, b) => a.title.localeCompare(b.title));
 }
 
+/**
+ * Trie les photos du photographe en fonction du critère spécifié et affiche les médias triés.
+ * @param {string} sortBy - Le critère de tri ("popularite", "date" ou "titre").
+ */
 export async function sortPhotos(sortBy) {
   let sortedPhotos;
 
