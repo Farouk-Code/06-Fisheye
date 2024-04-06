@@ -1,5 +1,8 @@
 import { createPhotographerProfileTemplate } from "../templates/photographer.js";
 
+/**
+ * Récupère les données des photographes à partir d'un fichier JSON distant.
+ */
 async function getPhotographers() {
   try {
     const response = await fetch("../../data/photographers.json");
