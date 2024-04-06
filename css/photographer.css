@@ -87,7 +87,7 @@ body {
   cursor: pointer;
   align-self: center;
   position: absolute;
-  left: 50%;
+  left: 60%;
   transform: translateX(-50%);
 }
 
