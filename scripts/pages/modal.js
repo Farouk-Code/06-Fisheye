@@ -1,5 +1,7 @@
 // @ts-nocheck
-// Global DOM variables
+/**
+ * Variables globales du DOM
+ */
 const modal = document.getElementById("contact_modal");
 const openModalBtn = document.querySelector(".contact_button");
 const closeModalBtn = document.querySelector(".modal-close-btn");
@@ -7,7 +9,9 @@ const dialog = document.querySelector(".modal-dialog");
 const content = document.querySelector(".modal-content");
 const overlay = document.querySelector(".overlay");
 
-// Function to open the modal
+/**
+ * Affiche le modal et masque le reste de la page.
+ */
 function displayModal() {
   modal.style.display = "block";
   modal.setAttribute("aria-hidden", "false");
@@ -17,7 +21,9 @@ function displayModal() {
   overlay.style.display = "block";
 }
 
-// Function to close the modal
+/**
+ * Ferme le modal et rétablit l'affichage normal de la page.
+ */
 function closeModal() {
   modal.style.display = "none";
   modal.setAttribute("aria-hidden", "true");
@@ -27,11 +33,9 @@ function closeModal() {
   overlay.style.display = "none";
 }
 
-// Event listeners
 openModalBtn.addEventListener("click", displayModal);
 closeModalBtn.addEventListener("click", closeModal);
 
-// Close modal when the Escape key is pressed
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && modal.getAttribute("aria-hidden") === "false") {
     closeModal();
@@ -45,8 +49,11 @@ form.addEventListener("submit", (e) => {
   validate();
 });
 
-// FORM VALIDATION
-
+/**
+ * Valide une entrée de nom en utilisant une expression régulière.
+ * @param {HTMLInputElement} input - L'élément input contenant le nom à valider.
+ * @returns {boolean} Retourne true si le nom est valide, sinon false.
+ */
 function validateName(input) {
   const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ]{2,}$/;
   if (!regex.test(input.value)) {
@@ -58,6 +65,11 @@ function validateName(input) {
   }
 }
 
+/**
+ * Valide une entrée d'adresse e-mail en utilisant une expression régulière.
+ * @param {HTMLInputElement} input - L'élément input contenant l'adresse e-mail à valider.
+ * @returns {boolean} Retourne true si l'adresse e-mail est valide, sinon false.
+ */
 function validateEmail(input) {
   const emailRegex =
     /^[A-Za-z]{1,}[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
@@ -70,6 +82,11 @@ function validateEmail(input) {
   }
 }
 
+/**
+ * Valide une entrée de message en vérifiant si elle est vide.
+ * @param {HTMLTextAreaElement} input - L'élément textarea contenant le message à valider.
+ * @returns {boolean} Retourne true si le message est valide (non vide), sinon false.
+ */
 function validateMessage(input) {
   if (input.value === "") {
     input.classList.add("field-error");
@@ -80,14 +97,14 @@ function validateMessage(input) {
   }
 }
 
-// FORM VALIDATION PROCESS
-
+/**
+ * Procedure de validation
+ */
 const firstNameInput = document.getElementById("first-name");
 const lastNameInput = document.getElementById("last-name");
 const emailInput = document.getElementById("email");
 const messageInput = document.getElementById("message");
 
-//EVENTS LISTENERS ON CHANGE
 firstNameInput.addEventListener("input", function () {
   validateName(firstNameInput);
 });
@@ -101,6 +118,11 @@ messageInput.addEventListener("input", function () {
   validateMessage(messageInput);
 });
 
+/**
+ * Valide les champs de formulaire de prénom, nom, e-mail et message.
+ * Si tous les champs sont valides, affiche les valeurs des champs dans la console, empêche le formulaire de se soumettre et ferme le modal.
+ * @returns {boolean} Retourne true si tous les champs sont valides et false sinon.
+ */
 function validate() {
   const firstNameValid = validateName(firstNameInput);
   const lastNameValid = validateName(lastNameInput);
