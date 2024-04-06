@@ -13,8 +13,6 @@ export function calculateTotalLikes() {
 export function updateTotalLikes() {
   const totalLikes = calculateTotalLikes();
   const priceAndLikesContainer = document.querySelector(".total_likes");
-  const spanTotalLikes = document.createElement("span");
-  spanTotalLikes.classList.add("total-likes");
-  spanTotalLikes.textContent = String(totalLikes);
-  priceAndLikesContainer?.appendChild(spanTotalLikes);
+  // @ts-ignore
+  priceAndLikesContainer.innerHTML = `<span class="total-likes">${totalLikes}</span>`;
 }

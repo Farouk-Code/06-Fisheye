@@ -3,12 +3,12 @@ import { photographerPhotos } from "./data.js";
 
 /**
  * Récupère les données du photographe et de ses médias à partir du fichier JSON.
- * @param {number} id - L'identifiant du photographe.
+ * @param {String} id - L'identifiant du photographe.
  * @returns {Promise<Object>} Une promesse résolue avec les données du photographe correspondant à l'ID.
  */
 export async function fetchPhotographerData(id) {
   try {
-    const response = await fetch("../../data/photographers.json");
+    const response = await fetch("data/photographers.json");
     if (!response.ok) {
       throw new Error("Failed to fetch photographer data");
     }
@@ -16,7 +16,7 @@ export async function fetchPhotographerData(id) {
 
     // Filtrer les photos du photographe spécifié
     const filteredPhotos = data.media.filter(
-      (photo) => photo.id === Number(id)
+      (photo) => photo.photographerId === parseInt(id)
     );
 
     // Réinitialiser le tableau des photos du photographe et ajouter les nouvelles données
@@ -30,10 +30,10 @@ export async function fetchPhotographerData(id) {
     sortPhotos("popularite");
 
     // Retourner les données du photographe correspondant à l'ID
-    return data.photographer.find(
-      (photographer) => photographer.id === Number(id)
+    return data.photographers.find(
+      (photographer) => photographer.id === parseInt(id, 10)
     );
   } catch (error) {
-    console.log(error.message);
+    throw error;
   }
 }

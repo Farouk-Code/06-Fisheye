@@ -1,53 +1,52 @@
-class Media {
+class ImageMedia {
   constructor(data) {
     this.id = data.id;
     this.photographerId = data.photographerId;
     this.title = data.title;
-    this.like = data.likes;
+    this.likes = data.likes;
     this.date = data.date;
     this.price = data.price;
-  }
-}
-
-class MediaImage extends Media {
-  constructor(data) {
-    super(data);
     this.type = "image";
     this.url = `assets/images/${data.photographerId}/${data.image}`;
   }
 
   createMediaElement() {
-    const mediaImage = document.createElement("img");
-    mediaImage.setAttribute("src", this.url);
-    mediaImage.setAttribute("alt", this.title);
-    return mediaImage;
+    const mediaElement = document.createElement("img");
+    mediaElement.src = this.url;
+    mediaElement.alt = this.title;
+    return mediaElement;
   }
 }
 
-class MediaVideo extends Media {
+class VideoMedia {
   constructor(data) {
-    super(data);
+    this.id = data.id;
+    this.photographerId = data.photographerId;
+    this.title = data.title;
+    this.likes = data.likes;
+    this.date = data.date;
+    this.price = data.price;
     this.type = "video";
     this.url = `assets/images/${data.photographerId}/${data.video}`;
   }
 
   createMediaElement() {
-    const mediaVideo = document.createElement("video");
-    mediaVideo.setAttribute("controls", "");
-    const sourceVideo = document.createElement("source");
-    sourceVideo.setAttribute("src", this.url);
-    sourceVideo.setAttribute("type", "video/mp4");
-    mediaVideo.appendChild(sourceVideo);
-    return mediaVideo;
+    const mediaElement = document.createElement("video");
+    mediaElement.setAttribute("controls", ""); // Add video controls
+    const sourceElement = document.createElement("source");
+    sourceElement.src = this.url;
+    sourceElement.type = "video/mp4";
+    mediaElement.appendChild(sourceElement);
+    return mediaElement;
   }
 }
 
 export function createMedia(data) {
   if (data.image) {
-    return new MediaImage();
+    return new ImageMedia(data);
   } else if (data.video) {
-    return new MediaVideo();
+    return new VideoMedia(data);
   } else {
-    throw new Error("Invalid media data");
+    throw new Error("Invalid media data: Neither image nor video specified.");
   }
 }

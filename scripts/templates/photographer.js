@@ -39,7 +39,7 @@ export function createParagraph(text) {
  * @param {HTMLElement[]} children
  * @returns {HTMLDivElement}
  */
-export function createPhotographeContainer(children) {
+export function createCardContainer(children) {
   const imageContainer = document.createElement("div");
   imageContainer.classList.add("photographer_card");
   imageContainer.setAttribute("tabindex", "0");
@@ -97,7 +97,7 @@ export function createPhotographerProfileTemplate(data) {
   const h3 = createHeading("h3", `${city}, ${country}`);
   const tag = createParagraph(tagline);
   const rate = createParagraph(`${price}€/jour`);
-  const imageContainer = createPhotographeContainer([image]);
+  const imageContainer = createCardContainer([image]);
 
   const content = [imageContainer, h2, h3, tag, rate];
   const article = createPhotographerProfileArticle(id, content, name);
