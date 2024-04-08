@@ -89,7 +89,6 @@ function createVideoElement(src, alt) {
  */
 export function createAndRenderMedia(photos) {
   if (!photos) {
-    console.error("No media for this photographe");
     return;
   }
 
