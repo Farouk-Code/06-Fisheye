@@ -5,8 +5,6 @@
 const modal = document.getElementById("contact_modal");
 const openModalBtn = document.querySelector(".contact_button");
 const closeModalBtn = document.querySelector(".modal-close-btn");
-const dialog = document.querySelector(".modal-dialog");
-const content = document.querySelector(".modal-content");
 const overlay = document.querySelector(".overlay");
 
 /**
@@ -44,7 +42,7 @@ document.addEventListener("keydown", (e) => {
 
 const form = document.getElementById("contact-form");
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
   validate();
 });

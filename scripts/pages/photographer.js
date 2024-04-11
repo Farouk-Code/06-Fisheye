@@ -55,7 +55,6 @@ function createPhotographerProfile(data) {
   photographHeader.append(h2, h3, tag);
   const modalHeader = document.querySelector(".modal-header");
   modalHeader.appendChild(modalname);
-  const prix = createHeading("h3", price);
   const priceContainer = document.createElement("p");
   priceContainer.classList.add("price");
   priceContainer.textContent = price + "€ / jour";
@@ -98,7 +97,7 @@ export function createAndRenderMedia(photos) {
   for (const mediaData of photos) {
     const media = createMedia(mediaData);
 
-    const mediaCard = document.createElement("div");
+    const mediaCard = document.createElement("article");
     mediaCard.classList.add("photo");
 
     if (media.type === "image") {

@@ -57,6 +57,9 @@ previousButton.addEventListener("click", () => {
   if (currentImageIndex > 0) {
     currentImageIndex--;
     loadCurrentImage();
+  } else {
+    currentImageIndex = photographerPhotos.length - 1;
+    loadCurrentImage();
   }
 });
 
@@ -66,6 +69,9 @@ previousButton.addEventListener("click", () => {
 nextButton.addEventListener("click", () => {
   if (currentImageIndex < photographerPhotos.length - 1) {
     currentImageIndex++;
+    loadCurrentImage();
+  } else {
+    currentImageIndex = 0;
     loadCurrentImage();
   }
 });
@@ -97,11 +103,17 @@ function keyboardNavigation(event) {
       if (currentImageIndex > 0) {
         currentImageIndex--;
         loadCurrentImage();
+      } else {
+        currentImageIndex = photographerPhotos.length - 1;
+        loadCurrentImage();
       }
       break;
     case "ArrowRight":
       if (currentImageIndex < photographerPhotos.length - 1) {
         currentImageIndex++;
+        loadCurrentImage();
+      } else {
+        currentImageIndex = 0;
         loadCurrentImage();
       }
       break;

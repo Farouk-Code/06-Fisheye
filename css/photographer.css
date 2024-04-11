@@ -464,7 +464,7 @@ form input {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: white;
   z-index: 1000;
 }
 
@@ -524,6 +524,5 @@ form input {
   font-weight: 400;
   line-height: 31px;
   letter-spacing: 0em;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 5%;
 }
